@@ -1,0 +1,4 @@
+# Starship prompt configuration
+
+[character]
+success_symbol = "[➜](bold green)"
