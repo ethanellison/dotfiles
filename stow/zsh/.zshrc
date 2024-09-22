@@ -1,5 +1,6 @@
 # Zsh configuration file
 
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 # Load Starship prompt
 eval "$(starship init zsh)"
 
