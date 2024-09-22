@@ -1,6 +1,6 @@
 # Define Homebrew packages
 brew "neovim"
-brew "passwordstore"
+# brew "passwordstore"
 brew "gpg"
 brew "zsh"
 brew "starship"
