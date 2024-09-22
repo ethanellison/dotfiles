@@ -10,16 +10,13 @@
 
 2. Run the installation script:
    ```sh
+   chmod +x install.sh
    ./install.sh
    ```
 
 3. Use GNU Stow to symlink dotfiles:
    ```sh
-   stow neovim
-   stow passwordstore
-   stow zsh
-   stow starship
-   stow tmux
+   stow -d stow -t $HOME .
    ```
 
 ## Components
