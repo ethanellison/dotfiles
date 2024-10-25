@@ -1,5 +1,8 @@
 # Dotfiles Repository
 
+## Prerequisite
+Install Nix and home manager
+
 ## Setup Instructions
 
 1. Clone the repository:
