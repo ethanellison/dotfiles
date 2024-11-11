@@ -46,7 +46,11 @@ in
     pkgs.nix-direnv
     pkgs.bat
     pkgs.zsh
+    pkgs.zsh-autocomplete
     pkgs.lazygit
+    pkgs.fabric-ai
+    pkgs.oh-my-zsh
+    pkgs.zsh-you-should-use
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -118,14 +122,28 @@ in
   programs.direnv.nix-direnv.enable = true;
   programs.zsh = {
     enable = true;
-    # autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    enableCompletion = true;
+    # enableAutosuggestions = true;
+    autosuggestion.enable = true;
+    # enableBashCompletion = true;
+    enableCompletion = false;
     shellAliases = myAliases;
     initExtra = ''
     eval "$(starship init zsh)"
     bindkey '^P' history-beginning-search-backward
     bindkey '^N' history-beginning-search-forward
     '';
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+      	"git"
+	"aliases"
+	"aws"
+	"docker"
+	"docker-compose"
+	"dbt"
+	"zsh-syntax-highlighting" "zsh-autosuggestions" "you-should-use"
+      ];
+    };
   };
 }
