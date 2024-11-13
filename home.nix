@@ -76,7 +76,7 @@ in
     ".tmux.conf".source = tmux/.tmux.conf;
     ".config/starship.toml".source = starship/starship.toml;
     ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink (builtins.toPath ./nvim);
+      source = ./nvim;
       recursive = true;
     };
 
@@ -104,7 +104,7 @@ in
   #  /etc/profiles/per-user/ethanellison/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "nvim";
+    EDITOR = "nvim";
   };
 
 
