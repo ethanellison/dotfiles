@@ -75,10 +75,6 @@ in
     # ".screenrc".source = dotfiles/screenrc;
     ".tmux.conf".source = tmux/.tmux.conf;
     ".config/starship.toml".source = starship/starship.toml;
-    ".config/nvim" = {
-      source = ./nvim;
-      recursive = true;
-    };
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
