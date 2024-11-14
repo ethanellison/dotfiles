@@ -23,7 +23,7 @@ return {
     name = 'catppuccin',
     lazy = false,
     config = function()
-      vim.cmd.colorscheme 'catppuccin-mocha'
+      vim.cmd.colorscheme 'tokyonight'
     end,
   },
   'uloco/bluloco.nvim',

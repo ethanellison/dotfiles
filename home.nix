@@ -35,6 +35,8 @@ in
     # # "Hello, world!" when run.
     pkgs.hello
     pkgs.nodejs_23
+    pkgs.python312Full
+    pkgs.python312Packages.pip
     pkgs.ripgrep
     pkgs.git
     pkgs.fortune
