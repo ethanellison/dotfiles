@@ -34,6 +34,7 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.hello
+    pkgs.nodejs_23
     pkgs.ripgrep
     pkgs.git
     pkgs.fortune
