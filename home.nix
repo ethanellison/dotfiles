@@ -75,10 +75,6 @@ in
     # ".screenrc".source = dotfiles/screenrc;
     ".tmux.conf".source = tmux/.tmux.conf;
     ".config/starship.toml".source = starship/starship.toml;
-    ".config/nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink (builtins.toPath ./nvim);
-      recursive = true;
-    };
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -117,6 +113,17 @@ in
     extraConfig = {
       init.defaultBranch = "main";
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    extraLuaConfig = ''
+      ${builtins.readFile ./nvim/init.lua}
+    '';
   };
   
   programs.lazygit.enable = true;
