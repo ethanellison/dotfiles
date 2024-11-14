@@ -34,7 +34,7 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.hello
-    pkgs.neovim
+    pkgs.ripgrep
     pkgs.git
     pkgs.fortune
     pkgs.tmux
@@ -51,6 +51,9 @@ in
     pkgs.fabric-ai
     pkgs.oh-my-zsh
     pkgs.zsh-you-should-use
+    pkgs.lua
+    pkgs.luajitPackages.luarocks-nix
+    pkgs.neovim
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -75,7 +78,10 @@ in
     # ".screenrc".source = dotfiles/screenrc;
     ".tmux.conf".source = tmux/.tmux.conf;
     ".config/starship.toml".source = starship/starship.toml;
-
+    ".config/nvim" = {
+      source = ./nvim;
+      recursive = true;
+    };
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
@@ -115,17 +121,44 @@ in
     };
   };
 
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+	#  programs.neovim = 
+	#  let
+	#    toLua = str: "lua << EOF\n${str}\nEOF\n";
+	#    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+	#  in
+	#  {
+	#    extraPackages = with pkgs; [
+	#      lua-language-server
+	#      # rnix-lsp
+	#      xclip
+	#      wl-clipboard
+	#    ];
+	#
+	#    plugins = with pkgs.vimPlugins; [
+	#      {
+	#        plugin = lazy-nvim;
+	# # config = toLuaFile ./nvim/init.lua;
+	#      }
+	#
+	#      {
+	#        plugin = gruvbox-nvim;
+	#        config = "colorscheme gruvbox";
+	#      }
+	#
+	#      vim-sleuth
+	#    ];
+	#    enable = true;
+	#    viAlias = true;
+	#    vimAlias = true;
+	#    vimdiffAlias = true;
+	#
+	#    extraLuaConfig = ''
+	#      ${builtins.readFile ./nvim/init.lua}
+	#    '';
+	#
+	#
+	#  };
 
-    extraLuaConfig = ''
-      ${builtins.readFile ./nvim/init.lua}
-    '';
-  };
-  
   programs.lazygit.enable = true;
   programs.starship.enable = true;
   programs.direnv.enable = true;
