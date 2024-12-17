@@ -21,7 +21,7 @@ sh <(curl -L https://nixos.org/nix/install) --daemon
    ```
 ### Enable flakes
 Add the following line to /etc/nix/nix.conf
-experimental-features nix-command flakes
+experimental-features = nix-command flakes
 
 ## Setup Instructions
 
