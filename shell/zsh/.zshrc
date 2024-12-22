@@ -1,8 +1,9 @@
 # Zsh configuration file
 
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+# export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 # Load Starship prompt
 eval "$(starship init zsh)"
+# eval "$(devbox global shellenv --init-hook)"
 
 # Set up aliases
 alias ll='ls -la'

@@ -1,17 +1,5 @@
 { config, pkgs, ... }:
 let
-  # My shell aliases
-  myAliases = {
-    ls = "eza --icons -l -T -L=1";
-    cat = "bat";
-    htop = "btm";
-    fd = "fd -Lu";
-    w3m = "w3m -no-cookie -v";
-    neofetch = "disfetch";
-    fetch = "disfetch";
-    gitfetch = "onefetch";
-    "," = "comma";
-  };
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -37,23 +25,11 @@ in
     pkgs.nodejs_23
     pkgs.python312Full
     pkgs.python312Packages.pip
-    pkgs.ripgrep
     pkgs.git
     pkgs.fortune
-    pkgs.tmux
     pkgs.htop
-    pkgs.starship
-    pkgs.bat
-    pkgs.eza
-    pkgs.direnv
-    pkgs.nix-direnv
-    pkgs.bat
-    pkgs.zsh
-    pkgs.zsh-autocomplete
     pkgs.lazygit
     pkgs.fabric-ai
-    pkgs.oh-my-zsh
-    pkgs.zsh-you-should-use
     pkgs.lua
     pkgs.luajitPackages.luarocks-nix
     pkgs.neovim
@@ -79,8 +55,6 @@ in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-    ".tmux.conf".source = tmux/.tmux.conf;
-    ".config/starship.toml".source = starship/starship.toml;
     ".config/nvim" = {
       source = ./nvim;
       recursive = true;
@@ -115,6 +89,7 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  imports = [ ./shell/sh.nix ];
   programs.git = {
     enable = true;
     userName = "ethanellison";
@@ -123,74 +98,6 @@ in
       init.defaultBranch = "main";
     };
   };
-
-	#  programs.neovim = 
-	#  let
-	#    toLua = str: "lua << EOF\n${str}\nEOF\n";
-	#    toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
-	#  in
-	#  {
-	#    extraPackages = with pkgs; [
-	#      lua-language-server
-	#      # rnix-lsp
-	#      xclip
-	#      wl-clipboard
-	#    ];
-	#
-	#    plugins = with pkgs.vimPlugins; [
-	#      {
-	#        plugin = lazy-nvim;
-	# # config = toLuaFile ./nvim/init.lua;
-	#      }
-	#
-	#      {
-	#        plugin = gruvbox-nvim;
-	#        config = "colorscheme gruvbox";
-	#      }
-	#
-	#      vim-sleuth
-	#    ];
-	#    enable = true;
-	#    viAlias = true;
-	#    vimAlias = true;
-	#    vimdiffAlias = true;
-	#
-	#    extraLuaConfig = ''
-	#      ${builtins.readFile ./nvim/init.lua}
-	#    '';
-	#
-	#
-	#  };
-
   programs.lazygit.enable = true;
   programs.starship.enable = true;
-  programs.direnv.enable = true;
-  programs.direnv.enableZshIntegration = true;
-  programs.direnv.nix-direnv.enable = true;
-  programs.zsh = {
-    enable = true;
-    syntaxHighlighting.enable = true;
-    # enableAutosuggestions = true;
-    autosuggestion.enable = true;
-    # enableBashCompletion = true;
-    enableCompletion = false;
-    shellAliases = myAliases;
-    initExtra = ''
-    eval "$(starship init zsh)"
-    bindkey '^P' history-beginning-search-backward
-    bindkey '^N' history-beginning-search-forward
-    '';
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-      	"git"
-	"aliases"
-	"aws"
-	"docker"
-	"docker-compose"
-	"dbt"
-	"zsh-syntax-highlighting" "zsh-autosuggestions" "you-should-use"
-      ];
-    };
-  };
 }
