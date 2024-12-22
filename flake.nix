@@ -31,7 +31,10 @@
           };
           # Optionally use extraSpecialArgs
           # to pass through arguments to home.nix
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            ./shell/sh.nix
+          ];
         };
         "pi@pi" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-linux";
@@ -49,7 +52,10 @@
               email = "e_21997@hotmail.com";
             };
           };
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+            ./shell/sh.nix
+          ];
         };
       
 
