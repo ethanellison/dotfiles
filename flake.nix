@@ -10,21 +10,49 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
     let
-      system = "x86_64-linux";
       # system = "x86_64-darwin";
-      pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."ethanellison" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
+        "ethanellison@ubuntu02" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          # Specify your home configuration modules here, for example,
+          # the path to your home.nix.
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            inherit inputs;
+            vars = {
+              username = "ethanellison";
+              name = "ethanellison";
+              directory = "/home/ethanellison";
+              email = "e_21997@hotmail.com";
+            };
+          };
+          # Optionally use extraSpecialArgs
+          # to pass through arguments to home.nix
+          modules = [ ./home.nix ];
+        };
+        "pi@pi" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-linux";
+          # Specify your home configuration modules here, for example,
+          # the path to your home.nix.
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+          # Optionally use extraSpecialArgs
+          # to pass through arguments to home.nix
+          extraSpecialArgs = {
+            inherit inputs;
+            vars = {
+              username = "pi";
+              name = "pi";
+              directory = "/home/pi";
+              email = "e_21997@hotmail.com";
+            };
+          };
+          modules = [ ./home.nix ];
+        };
+      
+
       };
     };
 }
