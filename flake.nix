@@ -12,10 +12,24 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
     let
+      configuration = { pkgs, ... } : {
+        imports = [ ./system/tailscale.nix ];
+        # homebrew = {
+        #   enable = true;
+        #   taps = [];
+        #   brews = [];
+        #   casks = [
+        #     "google-chrome"
+        #     "font-jetbrains-mono-nerd-font"
+        #     "iterm2"
+        #     "docker"
+        #   ];
+        # };
+      };
       # system = "x86_64-darwin";
     in {
       homeConfigurations = {
-        "ethanellison@ubuntu02" = home-manager.lib.homeManagerConfiguration {
+        "ethanellison" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           # Specify your home configuration modules here, for example,
           # the path to your home.nix.
@@ -32,6 +46,7 @@
           # Optionally use extraSpecialArgs
           # to pass through arguments to home.nix
           modules = [
+            configuration
             ./home.nix
             ./shell/sh.nix
           ];
