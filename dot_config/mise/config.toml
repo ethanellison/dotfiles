@@ -1,0 +1,4 @@
+[tools]
+chezmoi = "2.69.3"
+"github:anomalyco/opencode" = "latest"
+usage = "latest"
